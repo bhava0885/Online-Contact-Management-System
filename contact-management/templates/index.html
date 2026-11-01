@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Manager</title>
+  <!-- Plain HTML (no Flask tags), so it works with Live Server AND at http://127.0.0.1:5000/ -->
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>📇 Contact Manager</h1>
+    <p>Save, find and update your contacts in one place.</p>
+  </header>
+
+  <div id="offlineBanner" class="banner" hidden>
+    ⚠️ Cannot reach the server. Start it first: press F5 in VS Code (or run <code>python app.py</code>), then refresh this page.
+  </div>
+
+  <main class="layout">
+    <!-- Add / edit form -->
+    <section class="panel">
+      <h2 id="formTitle">➕ Add contact</h2>
+      <form id="contactForm">
+        <input type="hidden" id="contactId">
+
+        <label for="name">Name</label>
+        <input type="text" id="name" maxlength="60" placeholder="e.g. Priya Sharma" required>
+
+        <label for="phone">Phone number</label>
+        <input type="tel" id="phone" maxlength="20" pattern="[0-9+\-() ]{7,20}"
+               title="7-20 characters: digits, spaces, + - ( )" placeholder="e.g. +91 98765 43210" required>
+
+        <label for="email">Email <span class="optional">(optional)</span></label>
+        <input type="email" id="email" maxlength="100" placeholder="e.g. priya@example.com">
+
+        <label for="address">Address <span class="optional">(optional)</span></label>
+        <textarea id="address" rows="3" maxlength="200" placeholder="Street, city"></textarea>
+
+        <div class="btn-row">
+          <button type="submit" class="btn btn-primary" id="saveBtn">Add contact</button>
+          <button type="button" class="btn btn-light" id="cancelBtn" hidden>Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Contact list -->
+    <section class="panel">
+      <div class="list-head">
+        <h2>👥 All contacts <span class="count" id="count">0</span></h2>
+        <input type="search" id="search" placeholder="🔍 Search by name or phone" aria-label="Search contacts">
+      </div>
+      <div id="contactList" class="contact-list"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="../static/script.js"></script>
+</body>
+</html>
